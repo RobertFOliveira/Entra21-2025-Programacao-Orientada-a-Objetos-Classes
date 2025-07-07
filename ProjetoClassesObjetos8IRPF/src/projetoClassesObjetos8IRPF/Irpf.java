@@ -1,10 +1,10 @@
 package projetoClassesObjetos8IRPF;
 
 public class Irpf {
-	String nome;
-	String CPF;
-	String UF;
-	double rendaAnual;
+	private String nome;
+	private String CPF;
+	private String UF;
+	private double rendaAnual;
 
 	public Irpf(String nome, String cPF, String uF, double rendaAnual) {
 		super();
@@ -46,10 +46,7 @@ public class Irpf {
 		this.rendaAnual = rendaAnual;
 	}
 
-	// calculo imposto de renda
-
 	public double calcularImposto() {
-
 		if (rendaAnual <= 4000) {
 			return 0;
 		} else if (rendaAnual <= 9000) {
