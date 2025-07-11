@@ -1,7 +1,11 @@
 package projetoClassesObjetosIRPF;
 
-public class Contribuinte {
+import java.text.NumberFormat;
+import java.util.Locale;
 
+public class Contribuinte {
+	NumberFormat formatoBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+	
 	private String nome;
 	private String cpf;
 	private String uf;
@@ -72,15 +76,15 @@ public class Contribuinte {
 			return 0;
 		} 
 		if (rendaAnual <= 9000) {
-			return rendaAnual * 0.058;
+			return 0.058;
 		} 
 		if (rendaAnual <= 25000) {
-			return rendaAnual * 0.15;
+			return 0.15;
 		} 
 		if (rendaAnual <= 35000) {
-			return rendaAnual * 0.275;
+			return 0.275;
 		}
-			return rendaAnual * 0.30;
+			return 0.30;
 
 	}
 	
@@ -104,7 +108,7 @@ public class Contribuinte {
 
 	@Override
 	public String toString() {
-		return "Irpf [nome " + nome + ", cpf " + cpf + ", uf " + uf + ", rendaAnual " + rendaAnual + "]";
+		return "Irpf [Nome:  " + nome + ", CPF:  " + cpf + ", UF:  " + uf + ", Renda Anual: " + formatoBR.format(rendaAnual) + "]\nImposto de renda a pagar: " + formatoBR.format(calcularImpostoDeRenda());
 	}
 
 }

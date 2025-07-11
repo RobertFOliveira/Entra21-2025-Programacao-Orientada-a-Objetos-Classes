@@ -1,9 +1,17 @@
 package projetoClassesObjetosIRPF;
 
+import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+
 public class App {
 
+	
 	public static void main(String[] args) {
 
+		NumberFormat formatoBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		
 		// TODO Auto-generated method stub
 		// Para efetuar o recolhimento do Imposto de Renda a Receita Federal tem o NOME,
 		// CPF, UF (RS, PR e SC) e RENDA ANUAL.
@@ -31,9 +39,12 @@ public class App {
 		Contribuinte D = new Contribuinte("Baltazar Bento", "78912345620", "RJ", 9000);
 		Contribuinte E = new Contribuinte("Aristoteles Gaia", "15975346850", "RS", 12000);
 
+		// 			// Declaração contribuintes no vetor
+		// Irpf[] irpfs = { contribuinteA, contribuinteB, contribuinteC, contribuinteD, contribuinteE };
+		
 		Contribuinte vetor[] = { A, B, C, D, E };
 
-		// calculo imposto de renda
+		// a) Quem mais paga imposto.
 
 		double maiorImposto = 0;
 		Contribuinte contribuinteMaiorImposto = null;
@@ -44,14 +55,28 @@ public class App {
 			}
 		}
 
-		System.out.println(contribuinteMaiorImposto);
+		System.out.println("O contribuinte que paga o maior imposto foi: " + contribuinteMaiorImposto);
+		
+		// b) Quem menos paga imposto.
+		
+		double menorImposto = Double.MAX_VALUE;
+		Contribuinte contribuinteMenorImposto = null;
+		for (int i = 0; i < vetor.length; i++) {
+			if (vetor[i].calcularImpostoDeRenda() < menorImposto) {
+				menorImposto = vetor[i].calcularImpostoDeRenda();
+				contribuinteMenorImposto = vetor[i];
+			}
+		}
+
+		System.out.println("O contribuinte que paga o menor imposto foi: " + contribuinteMenorImposto);
 
 		// Total de imposto pago
 		double totalImposto = 0;
 		for (int i = 0; i < vetor.length; i++) {
 			totalImposto += vetor[i].calcularImpostoDeRenda();
 		}
-		System.out.println("O total de imposto arrecadado foi de R$ " + totalImposto);
+		System.out.println("O total de imposto arrecadado foi de: " + formatoBR.format(totalImposto));
 	}
 
+	
 }
